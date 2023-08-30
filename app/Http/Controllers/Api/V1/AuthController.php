@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Services\AuthService;
 use Illuminate\Http\Request;
+use OpenApi\Annotations as OA;
 
 class AuthController extends Controller
 {
+    public function __construct(private AuthService $service) {}
+
     /**
      * @OA\Post(
      *     path="/api/v1/auth/registration",
@@ -41,7 +45,7 @@ class AuthController extends Controller
      *     ),
      *     @OA\Response(
      *          response=200,
-     *          description="Успешная операция",
+     *          description="Success",
      *          @OA\JsonContent()
      *     )
      * )
@@ -54,5 +58,13 @@ class AuthController extends Controller
             'email',
             'password',
         ]);
+
+        $result = $this->service->registration($data);
+
+        if ($result->isError) {
+            return $this->badRequestResponse($result->message, $result->errors);
+        }
+
+        return $result->data;
     }
 }
