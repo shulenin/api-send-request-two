@@ -23,5 +23,11 @@ Route::prefix('v1')
         Route::namespace('Api\V1')->group(function () {
             Route::post('auth/registration', [\App\Http\Controllers\Api\V1\AuthController::class, 'registration'])
                 ->name('auth.registration');
+            Route::post('auth/login', [\App\Http\Controllers\Api\V1\AuthController::class, 'login'])
+                ->name('auth.login');
+        });
+
+        Route::middleware(['auth:sanctum'])->group(function () {
+
         });
     });
