@@ -28,6 +28,7 @@ Route::prefix('v1')
         });
 
         Route::middleware(['auth:sanctum'])->group(function () {
-
+            Route::post('request/send',[\App\Http\Controllers\Api\V1\RequestController::class, 'send'])
+                ->name('request.send');
         });
     });

@@ -91,6 +91,52 @@
                     }
                 }
             }
+        },
+        "/api/v1/request/send": {
+            "post": {
+                "tags": [
+                    "Request"
+                ],
+                "summary": "Send request",
+                "operationId": "b86b9deb59b14fc8ce555dde160e27cf",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "description": "Title",
+                                        "type": "string",
+                                        "example": "Test Title"
+                                    },
+                                    "text": {
+                                        "description": "Text",
+                                        "type": "string",
+                                        "example": "Lorem ipsum text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
         }
     },
     "components": {

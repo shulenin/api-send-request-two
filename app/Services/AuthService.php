@@ -54,6 +54,7 @@ class AuthService
             'password' => ['required', 'string', 'max:255'],
         ];
         $messages = [
+            'required' => 'Field is required',
             'email' => 'Must be Email type',
             'string' => 'Must be string',
             'max' => 'Max count - :max',

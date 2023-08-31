@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
 use Orchid\Platform\Models\User as Authenticatable;
 
@@ -12,6 +13,8 @@ use Orchid\Platform\Models\User as Authenticatable;
  * @property integer $id
  * @property string $email
  * @property string $password
+ *
+ * @property Request $requests
  */
 class User extends Authenticatable
 {
@@ -49,4 +52,9 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    public function requests(): HasMany
+    {
+        return $this->hasMany(Request::class);
+    }
 }
