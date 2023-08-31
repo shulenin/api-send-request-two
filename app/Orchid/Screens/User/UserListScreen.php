@@ -53,16 +53,6 @@ class UserListScreen extends Screen
     }
 
     /**
-     * @return iterable|null
-     */
-    public function permission(): ?iterable
-    {
-        return [
-            'platform.systems.users',
-        ];
-    }
-
-    /**
      * The screen's action buttons.
      *
      * @return \Orchid\Screen\Action[]
