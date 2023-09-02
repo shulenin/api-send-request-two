@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid;
 
+use App\Repositories\RequestRepository;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
@@ -25,14 +26,22 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
-            Menu::make('Example screen')
-                ->icon('monitor')
-                ->route('platform.example')
-                ->badge(fn () => 6),
-
-            Menu::make('Chart tools')
-                ->icon('bar-chart')
-                ->route('platform.example.charts'),
+            Menu::make('Requests')->list([
+                Menu::make('Pending requests')
+                    ->icon('clock')
+                    ->badge(function () {
+                        $requestRepository = new RequestRepository();
+                        return $requestRepository->getCountByPendingStatus();
+                    })
+                    ->route('platform.pending-request'),
+                Menu::make('Answered requests')
+                    ->icon('check')
+                    ->badge(function () {
+                        $requestRepository = new RequestRepository();
+                        return $requestRepository->getCountByAnsweredStatus();
+                    })
+                    ->route('platform.answered-request'),
+            ])->icon('text-center'),
 
             Menu::make(__('Users'))
                 ->icon('user')

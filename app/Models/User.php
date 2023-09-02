@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
 use Orchid\Platform\Models\User as Authenticatable;
+use Orchid\Screen\AsSource;
 
 /**
  * Class User
  * @package App\Models
  *
  * @property integer $id
+ * @property string $name
  * @property string $email
  * @property string $password
  *
@@ -18,7 +20,7 @@ use Orchid\Platform\Models\User as Authenticatable;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens;
+    use HasApiTokens, AsSource;
 
     protected $fillable = [
         'name',

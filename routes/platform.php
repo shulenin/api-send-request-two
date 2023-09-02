@@ -61,11 +61,25 @@ Route::screen('users', UserListScreen::class)
         ->parent('platform.index')
         ->push(__('Users'), route('platform.systems.users')));
 
-// Example...
-Route::screen('example', ExampleScreen::class)
-    ->name('platform.example')
+// Platform > Pending Request
+Route::screen('pending-request', \App\Orchid\Screens\Request\PendingRequestList::class)
+    ->name('platform.pending-request')
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.index')
-        ->push('Example screen'));
+        ->push('Pending requests', route('platform.pending-request')));
 
-Route::screen('example-charts', ExampleChartsScreen::class)->name('platform.example.charts');
+// Platform > Pending Request > View
+Route::screen('pending-request/view/{id}', \App\Orchid\Screens\Request\ViewPendingRequestList::class)
+    ->name('platform.pending-request.view')
+    ->breadcrumbs(function (Trail $trail, $model) {
+        return $trail
+            ->parent('platform.pending-request')
+            ->push('Request', route('platform.pending-request.view', $model));
+    });
+
+// Platform > Answered Request
+Route::screen('answered-request', \App\Orchid\Screens\Request\AnsweredRequestList::class)
+    ->name('platform.answered-request')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push('Answered requests', route('platform.answered-request')));

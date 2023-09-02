@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Orchid\Screen\AsSource;
 
 /**
  * Class Request
@@ -16,10 +17,12 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $answer
  * @property string $status
  * @property integer $user_id
+ *
+ * @property User $user
  */
 class Request extends Model
 {
-    use HasFactory;
+    use HasFactory, AsSource;
 
     public const PENDING_STATUS = 1;
     public const ANSWERED_STATUS = 2;
@@ -40,8 +43,8 @@ class Request extends Model
         ];
     }
 
-    public function user(): HasOne
+    public function user(): BelongsTo
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 }
