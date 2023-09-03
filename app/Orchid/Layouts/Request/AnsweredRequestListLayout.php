@@ -17,10 +17,9 @@ class AnsweredRequestListLayout extends Table
     protected function columns(): iterable
     {
         return [
+            TD::make('title', 'Title'),
             TD::make('user.name', 'Name'),
             TD::make('user.email', 'Email'),
-            TD::make('title', 'Title'),
-            TD::make('answer', 'Answer'),
             TD::make('Clear')
                 ->render(function (Request $model) {
                     return Button::make()
