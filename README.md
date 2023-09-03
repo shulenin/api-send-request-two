@@ -19,3 +19,8 @@ php artisan key:generate
 ```bash
 php artisan orchid:admin admin <email> <password>
 ```
+
+API Documentation:
+```bash
+{hostname}/api/documentation
+```
