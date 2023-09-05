@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Services;
 
+use App\Enums\RequestType;
 use App\Mail\SendAnswerMail;
 use App\Models\Request;
 use Illuminate\Mail\Mailable;
@@ -15,11 +16,11 @@ class SendAnswerService
     {
         /** @var Request $request */
         $request = Request::query()
-            ->where('id', '=', $data['request']['id'])
+            ->byId($data['request']['id'])
             ->first();
 
         $request->answer = $data['answer'];
-        $request->status = Request::ANSWERED_STATUS;
+        $request->status = RequestType::Answered;
 
         $mail = new SendAnswerMail($request->title, $data['answer']);
 

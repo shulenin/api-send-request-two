@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\Request;
 
+use App\Enums\RequestType;
 use App\Models\Request;
 use App\Orchid\Services\SendAnswerService;
 use Orchid\Screen\Actions\Button;
@@ -41,7 +42,7 @@ class ViewPendingRequestList extends Screen
                 Sight::make('text', 'Text'),
                 Sight::make('status', 'Status')
                     ->render(function (Request $request) {
-                        return $request::getStatuses()[$request->status];
+                        return RequestType::from($request->status)->name;
                     }),
                 Sight::make('created_at', 'Created')
                     ->render(function (Request $request) {

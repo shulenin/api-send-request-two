@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid;
 
-use App\Repositories\RequestRepository;
+use App\Models\Request;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
@@ -30,15 +30,17 @@ class PlatformProvider extends OrchidServiceProvider
                 Menu::make('Pending requests')
                     ->icon('clock')
                     ->badge(function () {
-                        $requestRepository = new RequestRepository();
-                        return $requestRepository->getCountByPendingStatus();
+                        return Request::query()
+                            ->pending()
+                            ->count();
                     })
                     ->route('platform.pending-request'),
                 Menu::make('Answered requests')
                     ->icon('check')
                     ->badge(function () {
-                        $requestRepository = new RequestRepository();
-                        return $requestRepository->getCountByAnsweredStatus();
+                        return Request::query()
+                            ->answered()
+                            ->count();
                     })
                     ->route('platform.answered-request'),
             ])->icon('text-center'),

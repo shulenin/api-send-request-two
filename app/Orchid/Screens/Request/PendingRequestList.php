@@ -2,18 +2,20 @@
 
 namespace App\Orchid\Screens\Request;
 
+use App\Models\Request;
 use App\Orchid\Layouts\Request\PendingRequestListLayout;
-use App\Repositories\RequestRepository;
 use Orchid\Screen\Screen;
 
 class PendingRequestList extends Screen
 {
-    public function __construct(private RequestRepository $repository) {}
-
     public function query(): iterable
     {
         return [
-            'data' => $this->repository->getAllByPendingStatus(),
+            'data' => Request::query()
+                ->with('user')
+                ->pending()
+                ->orderBy('id', 'DESC')
+                ->get(),
         ];
     }
 

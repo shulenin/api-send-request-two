@@ -2,20 +2,21 @@
 
 namespace App\Orchid\Screens\Request;
 
+use App\Models\Request;
 use App\Orchid\Layouts\Request\AnsweredRequestListLayout;
-use App\Repositories\RequestRepository;
-use Illuminate\Http\Request;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Toast;
 
 class AnsweredRequestList extends Screen
 {
-    public function __construct(private RequestRepository $repository) {}
-
     public function query(): iterable
     {
         return [
-            'data' => $this->repository->getAllByAnsweredStatus(),
+            'data' => Request::query()
+                ->with('user')
+                ->answered()
+                ->orderBy('id', 'DESC')
+                ->get(),
         ];
     }
 
@@ -34,10 +35,10 @@ class AnsweredRequestList extends Screen
         ];
     }
 
-    public function clear(Request $request)
+    public function clear(\Illuminate\Http\Request $request)
     {
-        $request = \App\Models\Request::query()
-            ->where('id','=', $request->get('id'))
+        $request = Request::query()
+            ->byId($request->get('id'))
             ->first();
 
         $request->delete();

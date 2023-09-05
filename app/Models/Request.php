@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\RequestType;
+use App\Models\Scopes\RequestScope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,9 +27,6 @@ class Request extends Model
 {
     use HasFactory, AsSource;
 
-    public const PENDING_STATUS = 1;
-    public const ANSWERED_STATUS = 2;
-
     protected $fillable = [
         'title',
         'text',
@@ -35,16 +35,23 @@ class Request extends Model
         'user_id',
     ];
 
-    public static function getStatuses(): array
-    {
-        return [
-            self::PENDING_STATUS => 'Pending',
-            self::ANSWERED_STATUS => 'Answered',
-        ];
-    }
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function scopePending(Builder $query)
+    {
+        return $query->where('status', '=', RequestType::Pending);
+    }
+
+    public function scopeAnswered(Builder $query)
+    {
+        return $query->where('status', '=', RequestType::Answered);
+    }
+
+    public function scopeById(Builder $query, int $id)
+    {
+        return $query->where('id', '=', $id);
     }
 }

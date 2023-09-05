@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegistrationRequest;
 use App\Services\AuthService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use OpenApi\Annotations as OA;
 
 class AuthController extends Controller
@@ -52,7 +53,7 @@ class AuthController extends Controller
      * )
      *
      */
-    public function registration(Request $request)
+    public function registration(RegistrationRequest $request)
     {
         $data = $request->only([
             'name',
@@ -103,7 +104,7 @@ class AuthController extends Controller
      * )
      *
      */
-    public function login(Request $request): JsonResponse|array
+    public function login(LoginRequest $request): JsonResponse|array
     {
         $data = $request->only([
             'email',

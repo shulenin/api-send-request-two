@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
 use Orchid\Platform\Models\User as Authenticatable;
@@ -58,5 +59,10 @@ class User extends Authenticatable
     public function requests(): HasMany
     {
         return $this->hasMany(Request::class);
+    }
+
+    public function scopeByEmail(Builder $query, string $email)
+    {
+        return $query->where('email', '=', $email);
     }
 }

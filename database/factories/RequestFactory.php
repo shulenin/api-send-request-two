@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Request;
+use App\Enums\RequestType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,10 +18,10 @@ class RequestFactory extends Factory
         ];
 
         if ($this->faker->boolean) {
-            $data['status'] = Request::PENDING_STATUS;
+            $data['status'] = RequestType::Pending;
             $data['answer'] = null;
         } else {
-            $data['status'] = Request::ANSWERED_STATUS;
+            $data['status'] = RequestType::Answered;
             $data['answer'] = $this->faker->text;
         }
 

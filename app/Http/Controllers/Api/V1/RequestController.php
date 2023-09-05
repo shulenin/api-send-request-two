@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SendRequestRequest;
 use App\Services\RequestService;
-use Illuminate\Http\Request;
 use OpenApi\Annotations as OA;
 
 class RequestController extends Controller
@@ -48,7 +48,7 @@ class RequestController extends Controller
      * )
      *
      */
-    public function send(Request $request)
+    public function send(SendRequestRequest $request)
     {
         $data = $request->only([
             'title',
