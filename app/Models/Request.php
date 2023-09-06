@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\RequestType;
+use App\Models\Builders\RequestBuilder;
 use App\Models\Scopes\RequestScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -40,18 +41,8 @@ class Request extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function scopePending(Builder $query)
+    public function newEloquentBuilder($query): RequestBuilder
     {
-        return $query->where('status', '=', RequestType::Pending);
-    }
-
-    public function scopeAnswered(Builder $query)
-    {
-        return $query->where('status', '=', RequestType::Answered);
-    }
-
-    public function scopeById(Builder $query, int $id)
-    {
-        return $query->where('id', '=', $id);
+        return new RequestBuilder($query);
     }
 }

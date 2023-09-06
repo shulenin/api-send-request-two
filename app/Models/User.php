@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Builders\UserBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
@@ -61,8 +62,8 @@ class User extends Authenticatable
         return $this->hasMany(Request::class);
     }
 
-    public function scopeByEmail(Builder $query, string $email)
+    public function newEloquentBuilder($query): UserBuilder
     {
-        return $query->where('email', '=', $email);
+        return new UserBuilder($query);
     }
 }
