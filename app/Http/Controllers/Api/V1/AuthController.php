@@ -7,7 +7,6 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegistrationRequest;
 use App\Services\AuthService;
 use Illuminate\Http\JsonResponse;
-use OpenApi\Annotations as OA;
 
 class AuthController extends Controller
 {
@@ -17,7 +16,7 @@ class AuthController extends Controller
      * @OA\Post(
      *     path="/api/v1/auth/registration",
      *     summary="Registration",
-     *     tags={"User"},
+     *     tags={"Auth"},
      *     @OA\RequestBody(
      *       required=true,
      *       @OA\MediaType(
@@ -74,7 +73,7 @@ class AuthController extends Controller
      * @OA\Post(
      *     path="/api/v1/auth/login",
      *     summary="Login",
-     *     tags={"User"},
+     *     tags={"Auth"},
      *     @OA\RequestBody(
      *       required=true,
      *       @OA\MediaType(

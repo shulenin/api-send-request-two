@@ -30,5 +30,9 @@ Route::prefix('v1')
         Route::middleware(['auth:sanctum'])->group(function () {
             Route::post('request/send',[\App\Http\Controllers\Api\V1\RequestController::class, 'send'])
                 ->name('request.send');
+            Route::get('profile',[\App\Http\Controllers\Api\V1\ProfileController::class, 'profile'])
+                ->name('profile');
+            Route::get('profile/requests',[\App\Http\Controllers\Api\V1\ProfileController::class, 'requests'])
+                ->name('profile.requests');
         });
     });

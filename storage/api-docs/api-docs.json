@@ -8,7 +8,7 @@
         "/api/v1/auth/registration": {
             "post": {
                 "tags": [
-                    "User"
+                    "Auth"
                 ],
                 "summary": "Registration",
                 "operationId": "84a478fa908cef114305fd9533d32add",
@@ -54,7 +54,7 @@
         "/api/v1/auth/login": {
             "post": {
                 "tags": [
-                    "User"
+                    "Auth"
                 ],
                 "summary": "Login",
                 "operationId": "a7997e7c1e3bfed64d4e56de82415931",
@@ -90,6 +90,54 @@
                         }
                     }
                 }
+            }
+        },
+        "/api/v1/profile": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Get user profile data",
+                "operationId": "74bd0f9272b49f847e45d0f56cfc43a7",
+                "responses": {
+                    "200": {
+                        "description": "Успешная операция",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/profile/requests": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Get user request list",
+                "operationId": "382815365c2359dece196b45aa2636b8",
+                "responses": {
+                    "200": {
+                        "description": "Успешная операция",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
             }
         },
         "/api/v1/request/send": {
