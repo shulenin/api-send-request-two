@@ -19,7 +19,7 @@ class AuthService
             return ServiceResult::createErrorResult('User not be registered.');
         }
 
-        return ServiceResult::createSuccessResult('User has been registered.');
+        return ServiceResult::createSuccessResult(['message' => 'User has been registered.']);
     }
 
     public function login(array $data): ServiceResult
