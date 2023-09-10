@@ -6,7 +6,7 @@ use App\Enums\RequestType;
 use App\Models\Request;
 use App\Services\Common\ServiceResult;
 
-class RequestService
+final class RequestService
 {
     public function send(array $data): ServiceResult
     {

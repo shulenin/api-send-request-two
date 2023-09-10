@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Services\Common\ServiceResult;
 use Illuminate\Support\Facades\Hash;
 
-class AuthService
+final class AuthService
 {
     public function registration(array $data): ServiceResult
     {

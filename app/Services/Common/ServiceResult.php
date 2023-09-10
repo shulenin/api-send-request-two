@@ -2,7 +2,7 @@
 
 namespace App\Services\Common;
 
-class ServiceResult
+final class ServiceResult
 {
     public bool $isError = false;
 

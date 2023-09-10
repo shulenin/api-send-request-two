@@ -1,6 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\ProfileController;
+use App\Http\Controllers\Api\V1\RequestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,25 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::prefix('v1')
     ->group(function () {
-        Route::namespace('Api\V1')->group(function () {
-            Route::post('auth/registration', [\App\Http\Controllers\Api\V1\AuthController::class, 'registration'])
-                ->name('auth.registration');
-            Route::post('auth/login', [\App\Http\Controllers\Api\V1\AuthController::class, 'login'])
-                ->name('auth.login');
-        });
+        Route::post('auth/registration', [AuthController::class, 'registration'])
+            ->name('auth.registration');
+        Route::post('auth/login', [AuthController::class, 'login'])
+            ->name('auth.login');
 
         Route::middleware(['auth:sanctum'])->group(function () {
-            Route::post('request/send',[\App\Http\Controllers\Api\V1\RequestController::class, 'send'])
+            Route::post('request/send', [RequestController::class, 'send'])
                 ->name('request.send');
-            Route::get('profile',[\App\Http\Controllers\Api\V1\ProfileController::class, 'profile'])
+            Route::get('profile', [ProfileController::class, 'profile'])
                 ->name('profile');
-            Route::get('profile/requests',[\App\Http\Controllers\Api\V1\ProfileController::class, 'requests'])
+            Route::get('profile/requests', [ProfileController::class, 'requests'])
                 ->name('profile.requests');
         });
     });

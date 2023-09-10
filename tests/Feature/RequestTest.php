@@ -22,7 +22,7 @@ class RequestTest extends TestCase
             ]);
 
         $response
-            ->assertStatus(Response::HTTP_OK)
+            ->assertOk()
             ->assertJson([
                 'message' => 'success',
             ]);

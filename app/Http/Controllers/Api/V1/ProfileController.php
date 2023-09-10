@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\RequestsCollection;
+use App\Http\Resources\RequestCollection;
 use App\Http\Resources\UserResource;
-use App\Models\Request;
-use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -28,7 +26,7 @@ class ProfileController extends Controller
      */
     public function profile(): UserResource
     {
-        return new UserResource(User::where('id', auth()->id())->first());
+        return new UserResource(auth()->user());
     }
 
     /**
@@ -47,8 +45,8 @@ class ProfileController extends Controller
      * )
      *
      */
-    public function requests(): RequestsCollection
+    public function requests(): RequestCollection
     {
-        return new RequestsCollection(Request::where('user_id', auth()->id())->get());
+        return new RequestCollection(auth()->user()->requests);
     }
 }
